@@ -34,6 +34,7 @@ public class DataSourceDemoApplication implements CommandLineRunner {
 		log.info(dataSource.toString());
 		Connection conn = dataSource.getConnection();
 		log.info(conn.toString());
+		conn.
 		conn.close();
 	}
 
