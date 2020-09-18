@@ -1,5 +1,6 @@
 package geektime.spring.springbucks;
 
+import geektime.spring.springbucks.configs.MyTestConfig;
 import geektime.spring.springbucks.service.CoffeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.money.CurrencyUnit;
@@ -31,6 +32,8 @@ public class SpringBucksApplication implements ApplicationRunner {
 	private JedisPool jedisPool;
 	@Autowired
 	private JedisPoolConfig jedisPoolConfig;
+	@Autowired
+	private MyTestConfig myTestConfig;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBucksApplication.class, args);
@@ -46,6 +49,12 @@ public class SpringBucksApplication implements ApplicationRunner {
 	public JedisPool jedisPool(@Value("${redis.host}") String host) {
 		return new JedisPool(jedisPoolConfig(), host);
 	}
+
+//	@Bean
+//	@ConfigurationProperties("myconfig")
+//	public MyTestConfig myTestConfig() {
+//		return new MyTestConfig();
+//	}
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -65,6 +74,12 @@ public class SpringBucksApplication implements ApplicationRunner {
 			log.info("espresso - {}",
 					Money.ofMinor(CurrencyUnit.of("CNY"), Long.parseLong(price)));
 		}
+
+//		MyTestConfig myTestConfigTemp = myTestConfig();
+//		log.info(myTestConfigTemp.getArgv1());
+//		log.info(myTestConfigTemp.getArgv1());
+		log.info(myTestConfig.getArgv1());
+		log.info(myTestConfig.getArgv1());
 	}
 }
 
